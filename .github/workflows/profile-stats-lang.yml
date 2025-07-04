@@ -1,0 +1,42 @@
+name: Update GitHub Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 毎日UTC午前0時 (JST午前9時) に実行
+  workflow_dispatch: # 手動実行を可能にする
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # リポジトリへの書き込み権限を付与
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch GitHub Stats Card
+        # anuraghazra/github-readme-stats の公式Vercelデプロイを利用します
+        # 自分のVercelデプロイが使えないため、こちらに頼ります
+        # 注意: 頻繁な実行はレート制限に引っかかる可能性があります
+        run: |
+          # Create the directory if it doesn't exist
+          mkdir -p profile-images
+
+          # Stats Card
+          curl -sS "https://github-readme-stats.vercel.app/api/stats?username=${{ github.repository_owner }}&show_icons=true&theme=dark&count_private=true&token=${{ secrets.PERSONAL_ACCESS_TOKEN }}" > ./profile-images/github-stats.svg
+
+          # Top Languages Card
+          curl -sS "https://github-readme-stats.vercel.app/api/top-langs/?username=${{ github.repository_owner }}&layout=compact&theme=dark&count_private=true&token=${{ secrets.PERSONAL_ACCESS_TOKEN }}" > ./profile-images/top-langs.svg
+        env:
+          # GitHub Readme StatsのAPIに渡すためのトークンです
+          # Secretsに設定した名前と同じにする
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add ./profile-images/*.svg
+          git commit -m "Update GitHub Stats images" || echo "No changes to commit"
+          git push
