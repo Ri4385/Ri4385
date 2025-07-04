@@ -14,6 +14,4 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-[![](https://raw.githubusercontent.com/Ri4385/Ri4385/main/profile-summary-card-output/gotham/3-stats.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards) 
-
-[![](https://raw.githubusercontent.com/Ri4385/Ri4385/main/profile-summary-card-output/gotham/1-repos-per-language.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards) 
+[![](https://raw.githubusercontent.com/Ri4385/Ri4385/main/profile-summary-card-output/gotham/3-stats.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards) [![](https://raw.githubusercontent.com/Ri4385/Ri4385/main/profile-summary-card-output/gotham/1-repos-per-language.svg)](https://github.com/vn7n24fzkq/github-profile-summary-cards) 
